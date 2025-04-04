@@ -1,0 +1,49 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class CredentialValidator {
+
+    // Mock database of user credentials
+    private static Map<String, String> userDatabase = new HashMap<>();
+
+    static {
+        // Adding some users to the mock database
+        userDatabase.put("matthew.hayden@enbridge.com", "cGFzc3dvcmQxMjM");
+        userDatabase.put("adam.gilchrist@enbride.com", "c2VjdXJlUGFzczQ1Ng");
+        userDatabase.put("admin", "YWRtaW5QYXNzNzg5");
+    }
+
+    // Method to validate user credentials
+    public static boolean validateCredentials(String username, String password) {
+        if (userDatabase.containsKey(username)) {
+            return userDatabase.get(username).equals(password);
+        }
+        return false;
+    }
+
+    // Method to display the login interface
+    public static void displayLoginInterface() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Welcome to the Credential Validator");
+        System.out.print("Enter username: ");
+        String username = scanner.nextLine();
+
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+
+        if (validateCredentials(username, password)) {
+            System.out.println("Login successful!");
+        } else {
+            System.out.println("Invalid username or password. Please try again.");
+        }
+
+        scanner.close();
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        displayLoginInterface();
+    }
+}
